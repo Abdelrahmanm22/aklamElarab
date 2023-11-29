@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Validator;
 class RatingController extends Controller
 {
     //
-    public function getRating($reader_id,$book_id){
-        $userRating = Rating::getUserRating($reader_id, $book_id);
+    public function getRating($book_id){
+        $userRating = Rating::getUserRating(auth()->user()->id, $book_id);
         // Now you can use $userRating as needed
         if ($userRating) {
             // User rating found

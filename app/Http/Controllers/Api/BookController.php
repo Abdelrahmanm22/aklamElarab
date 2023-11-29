@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Book;
+use App\Models\Bookview;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Trait\AttachmentTrait;
-
+use Carbon\Carbon;
 class BookController extends Controller
 {
     //
@@ -64,8 +65,29 @@ class BookController extends Controller
         return $this->apiResponse($book, 'Book Added successfully', 201);
     }
 
+    ///function to get book with comments and its own reader
     public function getBook($id){
         $book = Book::with('comments.reader')->find($id);
         return $this->apiResponse($book, 'ok', 200);
+    }
+
+    ///this function to increase views for book after bass on day
+    public function open($id){    
+        $view = Bookview::where('book_id', $id)
+            ->where('reader_id', auth()->user()->id)
+            ->first();
+
+        if ($view) {
+            return $this->apiResponse(0, 'Views do not increase because not a day has passed', 200);
+        } else {
+            $expirationDate = Carbon::now()->addMinutes(5);
+            Bookview::create([
+                'book_id' => $id,
+                'reader_id'=>auth()->user()->id,
+                'expiration_date' => $expirationDate,
+            ]);
+            Book::incrementView($id);
+            return $this->apiResponse(1, 'Views increased by 1', 200);
+        }
     }
 }

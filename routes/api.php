@@ -34,11 +34,14 @@ Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
 
 
 Route::group(['middleware'=>'jwt.verify'],function(){
+
+    
     Route::group(['middleware'=>'adminCheck'],function(){
         Route::post('/addAuthor',[AdminController::class,'addAuthor']);
         Route::get('/getUsers',[AdminController::class,'getAllUsers']);
         Route::get('/getAuthors',[AdminController::class,'getAuthors']);
         Route::post('/addBook',[BookController::class,'create']);
+        Route::get('/allBook', [BookController::class, 'index']);
     });
 
     Route::group(['middleware'=>'authorCheck'],function(){
@@ -46,13 +49,16 @@ Route::group(['middleware'=>'jwt.verify'],function(){
     });
 
     Route::group(['middleware'=>'readerCheck'],function(){
-        Route::get('/allBooks',[BookController::class,'index']);
+        Route::get('/allBooks', [BookController::class, 'index']);
         Route::get('/latestBooks',[BookController::class,'getLatest']);
         Route::get('/highestBooks',[BookController::class,'getHighestRate']);
         Route::post('/newComment',[CommentController::class,'create']);
         Route::get('/getBook/{id}',[BookController::class,'getBook']);
-        Route::get('/getRate/{reader_id}/{book_id}',[RatingController::class,'getRating']);
+        Route::get('/getRate/{book_id}',[RatingController::class,'getRating']);
         Route::post('/makeRate',[RatingController::class,'create']);
         Route::post('/updateRate',[RatingController::class,'update']);
+        Route::get('/openBook/{id}',[BookController::class,'open']);
     });
+
+    
 });

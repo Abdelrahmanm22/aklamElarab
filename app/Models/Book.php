@@ -38,7 +38,17 @@ class Book extends Model
 
         if ($book) {
             $book->update([
-                'rate' => $book->ratings()->avg('rate'),
+                'rate' => round($book->ratings()->avg('rate'), 1),                
+            ]);
+        }
+    }
+    public static function incrementView($bookId)
+    {
+        $book = self::find($bookId);
+
+        if ($book) {
+            $book->update([
+                'view' => $book->view + 1,
             ]);
         }
     }
