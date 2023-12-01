@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AuthorController;
 use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\CommentController;
+use App\Http\Controllers\Api\LibraryController;
 use App\Http\Controllers\Api\RatingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -58,6 +59,8 @@ Route::group(['middleware'=>'jwt.verify'],function(){
         Route::post('/makeRate',[RatingController::class,'create']);
         Route::post('/updateRate',[RatingController::class,'update']);
         Route::get('/openBook/{id}',[BookController::class,'open']);
+        Route::get('/getLibrary',[LibraryController::class,'index']);
+        Route::get('/addtoLibrary/{id}',[LibraryController::class,'OpenBooKToLibrary']);
     });
 
     

@@ -27,6 +27,11 @@ class RatingController extends Controller
         $validator = Validator::make($request->all(), [
             'rate' => 'required|integer|between:1,5',
             'book_id' => 'required',
+        ],[
+            'rate.required'=>'حقل المعدل مطلوب.',
+            'rate.integer'=>'يجب أن يكون المعدل عددًا صحيحًا.',
+            'rate.between'=>'يجب أن يكون المعدل بين 1 و 5.',
+            'book_id.required' => 'حقل الكتاب مطلوب.',
         ]);
         if ($validator->fails()) {
             return $this->apiResponse(null, $validator->errors(), 400);

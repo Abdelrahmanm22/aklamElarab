@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Library;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -43,12 +44,21 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function register(Request $request)
-    {
+    public function register(Request $request){
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|between:2,100',
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|confirmed|min:6',
+        ],[
+            'name.required' => 'يرجي ادخال الاسم ',
+            'name.between' => 'يجب أن يتراوح الاسم بين 2 و100 حرف.',
+            'email.required' => 'يرجي ادخال الايميل',
+            'email.email' =>'يجب أن يكون البريد الإلكتروني عنوان بريد إلكتروني صالحًا',
+            'email.max' => 'يجب ألا يزيد طول البريد الإلكتروني عن 100 حرف.',
+            'email.unique'=>'البريد الإلكتروني تم أخذه.',
+            'password.required' => 'حقل كلمة المرور مطلوب.',
+            'password.confirmed' => 'تأكيد كلمة المرور غير متطابق.',
+            'password.min'=> 'يجب أن تتكون كلمة المرور من 6 أحرف على الأقل.'
         ]);
         if ($validator->fails()) {
             // return response()->json($validator->errors()->toJson(), 400);
@@ -61,6 +71,8 @@ class AuthController extends Controller
                 'type' => $request->type,
             ]
         ));
+
+        Library::createLibrary($user->id);
         // return response()->json([
         //     'message' => 'User successfully registered',
         //     'user' => $user

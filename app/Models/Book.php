@@ -52,4 +52,9 @@ class Book extends Model
             ]);
         }
     }
+    public function libraries()
+    {
+        return $this->belongsToMany(Library::class,'library_book');
+    }
+
 }

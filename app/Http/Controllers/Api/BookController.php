@@ -43,6 +43,16 @@ class BookController extends Controller
             'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
             'file' => 'required|mimes:pdf',
             'author_id' => 'required'
+        ],[
+            'name.required' => 'حقل الاسم مطلوب.',
+            'name.between' =>'يجب أن يتراوح الاسم بين 2 و100 حرف.',
+            'description.between' => 'يجب أن يتراوح الاسم بين 2 و1000 حرف.',
+            'image.required' => 'حقل الصورة مطلوب.',
+            'image.image'=>'يجب أن تكون الصورة صورة.',
+            'image.mimes'=>'يجب أن تكون الصورة ملفًا من النوع: jpg، png، jpeg، gif، svg.',
+            'file.required'=>'حقل الملف مطلوب.',
+            'file.mimes' => 'يجب أن تكون الصورة ملفًا من النوع: jpg، png، jpeg، gif، svg.',
+            'author_id.required' => 'حقل معرف المؤلف مطلوب.',
         ]);
 
         if ($validator->fails()) {
