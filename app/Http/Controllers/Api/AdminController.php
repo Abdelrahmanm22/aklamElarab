@@ -22,14 +22,14 @@ class AdminController extends Controller
             'password' => 'required|string|confirmed|min:6',
         ],[
             'name.required' => 'يرجي ادخال اسم المؤلف',
-            'name.between' => 'يجب أن يتراوح الاسم بين 2 و100 حرف.',
+            'name.between' => 'يجب أن يتراوح الاسم بين ٢ و١٠٠ حرف.',
             'email.required' => 'يرجي ادخال الايميل',
             'email.email' =>'يجب أن يكون البريد الإلكتروني عنوان بريد إلكتروني صالحًا',
-            'email.max' => 'يجب ألا يزيد طول البريد الإلكتروني عن 100 حرف.',
+            'email.max' => 'يجب ألا يزيد طول البريد الإلكتروني عن ١٠٠ حرف.',
             'email.unique'=>'البريد الإلكتروني تم أخذه.',
             'password.required' => 'حقل كلمة المرور مطلوب.',
             'password.confirmed' => 'تأكيد كلمة المرور غير متطابق.',
-            'password.min'=> 'يجب أن تتكون كلمة المرور من 6 أحرف على الأقل.'
+            'password.min'=> 'يجب أن تتكون كلمة المرور من ٦ أحرف على الأقل.'
 
         ]);
         if ($validator->fails()) {

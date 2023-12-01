@@ -29,6 +29,12 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required|string|min:6',
+        ],[
+            'email.required'=>'يرجي ادخال الايميل',
+            'email.email' =>'يجب أن يكون البريد الإلكتروني عنوان بريد إلكتروني صالحًا',
+            'password.required' => 'حقل كلمة المرور مطلوب.',
+            'password.confirmed' => 'تأكيد كلمة المرور غير متطابق.',
+            'password.min'=> 'يجب أن تتكون كلمة المرور من ٦ أحرف على الأقل.'
         ]);
         if ($validator->fails()) {
             // return response()->json($validator->errors(), 422);
@@ -50,15 +56,15 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|confirmed|min:6',
         ],[
-            'name.required' => 'يرجي ادخال الاسم ',
-            'name.between' => 'يجب أن يتراوح الاسم بين 2 و100 حرف.',
+            'name.required' => 'يرجي ادخال الاسم',
+            'name.between' => 'يجب أن يتراوح الاسم بين ٢ و١٠٠ حرف.',
             'email.required' => 'يرجي ادخال الايميل',
             'email.email' =>'يجب أن يكون البريد الإلكتروني عنوان بريد إلكتروني صالحًا',
-            'email.max' => 'يجب ألا يزيد طول البريد الإلكتروني عن 100 حرف.',
+            'email.max' => 'يجب ألا يزيد طول البريد الإلكتروني عن ١٠٠ حرف.',
             'email.unique'=>'البريد الإلكتروني تم أخذه.',
             'password.required' => 'حقل كلمة المرور مطلوب.',
             'password.confirmed' => 'تأكيد كلمة المرور غير متطابق.',
-            'password.min'=> 'يجب أن تتكون كلمة المرور من 6 أحرف على الأقل.'
+            'password.min'=> 'يجب أن تتكون كلمة المرور من ٦ أحرف على الأقل.'
         ]);
         if ($validator->fails()) {
             // return response()->json($validator->errors()->toJson(), 400);
