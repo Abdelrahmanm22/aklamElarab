@@ -77,7 +77,7 @@ class BookController extends Controller
 
     ///function to get book with comments and its own reader
     public function getBook($id){
-        $book = Book::with('comments.reader')->find($id);
+        $book = Book::with(['comments.reader','author'])->find($id);
         return $this->apiResponse($book, 'ok', 200);
     }
 
