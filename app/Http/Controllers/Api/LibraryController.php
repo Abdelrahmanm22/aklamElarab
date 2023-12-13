@@ -12,7 +12,8 @@ class LibraryController extends Controller
 
     public function index(){
         $library = Library::where('reader_id',auth()->user()->id)->first();
-        return $this->apiResponse($library->books,"ok",200);
+        $books = $library->books()->with('author')->get();
+        return $this->apiResponse($books,"ok",200);
     }
 
     public function OpenBooKToLibrary($id){
