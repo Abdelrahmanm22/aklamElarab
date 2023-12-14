@@ -61,6 +61,7 @@ Route::group(['middleware'=>'jwt.verify'],function(){
         Route::get('/openBook/{id}',[BookController::class,'open']);
         Route::get('/getLibrary',[LibraryController::class,'index']);
         Route::get('/addtoLibrary/{id}',[LibraryController::class,'OpenBooKToLibrary']);
+        Route::get('/deleteFromLibrary/{id}',[LibraryController::class,'delete']);
     });
 
     
