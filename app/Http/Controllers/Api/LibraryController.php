@@ -16,6 +16,7 @@ class LibraryController extends Controller
         return $this->apiResponse($books,"ok",200);
     }
 
+    ///function to add book to library
     public function OpenBooKToLibrary($id){
         
         $library = Library::where('reader_id',auth()->user()->id)->first();

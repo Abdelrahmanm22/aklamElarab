@@ -31,7 +31,7 @@ class BookController extends Controller
     public function getHighestRate(){
         $books = Book::select('id', 'name', 'description', 'image', 'file', 'rate', 'created_at')
             ->orderBy('rate', 'desc') // Orders the results by the rate column in descending order (highest first)
-            ->take(2)  // Retrieves only the top 10 highest rated books
+            ->take(10)  // Retrieves only the top 10 highest rated books
             ->get();
         return $this->apiResponse($books, 'ok', 200);
     }
