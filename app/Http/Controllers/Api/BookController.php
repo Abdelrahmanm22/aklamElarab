@@ -81,7 +81,7 @@ class BookController extends Controller
         return $this->apiResponse($book, 'ok', 200);
     }
 
-    ///this function to increase views for book after bass on day
+    ///this function to increase views for book after pass one day
     public function open($id){    
         $view = Bookview::where('book_id', $id)
             ->where('reader_id', auth()->user()->id)
@@ -100,4 +100,5 @@ class BookController extends Controller
             return $this->apiResponse(1, 'Views increased by 1', 200);
         }
     }
+    
 }

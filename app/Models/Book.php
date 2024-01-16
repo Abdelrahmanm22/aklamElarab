@@ -32,6 +32,10 @@ class Book extends Model
         return $this->hasMany('App\Models\Rating','book_id','id');
     }
 
+    public function marks(){
+        return $this->hasMany('App\Models\Mark','book_id','id');
+    }
+
     public static function updateAverageRating($bookId)
     {
         $book = self::find($bookId);
