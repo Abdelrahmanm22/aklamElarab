@@ -20,20 +20,29 @@ class Book extends Model
         'admin_id',
     ];
 
-    public function author(){
-        return $this->belongsTo('App\Models\User','author_id');
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'book_category');
     }
 
-    public function comments(){
-        return $this->hasMany('App\Models\Comment','book_id','id');
+    public function author()
+    {
+        return $this->belongsTo('App\Models\User', 'author_id');
     }
 
-    public function ratings(){
-        return $this->hasMany('App\Models\Rating','book_id','id');
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment', 'book_id', 'id');
     }
 
-    public function marks(){
-        return $this->hasMany('App\Models\Mark','book_id','id');
+    public function ratings()
+    {
+        return $this->hasMany('App\Models\Rating', 'book_id', 'id');
+    }
+
+    public function marks()
+    {
+        return $this->hasMany('App\Models\Mark', 'book_id', 'id');
     }
 
     public static function updateAverageRating($bookId)
@@ -42,7 +51,7 @@ class Book extends Model
 
         if ($book) {
             $book->update([
-                'rate' => round($book->ratings()->avg('rate'), 1),                
+                'rate' => round($book->ratings()->avg('rate'), 1),
             ]);
         }
     }
@@ -58,7 +67,6 @@ class Book extends Model
     }
     public function libraries()
     {
-        return $this->belongsToMany(Library::class,'library_book');
+        return $this->belongsToMany(Library::class, 'library_book');
     }
-
 }

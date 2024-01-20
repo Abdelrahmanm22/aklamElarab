@@ -4,10 +4,12 @@ use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AuthorController;
 use App\Http\Controllers\Api\BookController;
+use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\LibraryController;
 use App\Http\Controllers\Api\MarkController;
 use App\Http\Controllers\Api\RatingController;
+use App\Http\Controllers\Api\SearchController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -37,7 +39,7 @@ Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
 
 Route::group(['middleware'=>'jwt.verify'],function(){
 
-    
+    ///Routes For Admin only
     Route::group(['middleware'=>'adminCheck'],function(){
         Route::post('/addAuthor',[AdminController::class,'addAuthor']);
         Route::get('/getUsers',[AdminController::class,'getAllUsers']);
@@ -46,11 +48,13 @@ Route::group(['middleware'=>'jwt.verify'],function(){
         Route::get('/allBook', [BookController::class, 'index']);
     });
 
+    ///Routes For Author only
     Route::group(['middleware'=>'authorCheck'],function(){
         Route::get('/getMyBooks',[AuthorController::class,'getMyBooks']);
     });
 
-    Route::group(['middleware'=>'readerCheck'],function(){
+    ///Routes For Author and Reader (together)
+    Route::group(['middleware'=>'readerAuthorCheck'],function(){
         Route::get('/allBooks', [BookController::class, 'index']);
         Route::get('/latestBooks',[BookController::class,'getLatest']);
         Route::get('/highestBooks',[BookController::class,'getHighestRate']);
@@ -65,6 +69,10 @@ Route::group(['middleware'=>'jwt.verify'],function(){
         Route::get('/deleteFromLibrary/{id}',[LibraryController::class,'delete']);
         Route::get('/openBook/{bookId}',[MarkController::class,'open']);
         Route::post('/closeBook',[MarkController::class,'close']);
+        Route::get('/categories',[CategoryController::class,'index']);
+        Route::get('/category/{id}',[CategoryController::class,'getCategory']);
+        Route::get('/search/{word}',[SearchController::class,'search']);
     });
+
 
 });

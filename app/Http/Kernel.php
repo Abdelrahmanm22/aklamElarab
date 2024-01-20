@@ -66,6 +66,6 @@ class Kernel extends HttpKernel
         'jwt.verify' => \App\Http\Middleware\JwtMiddleware::class,
         'adminCheck' => \App\Http\Middleware\AdminCheck::class,
         'authorCheck' => \App\Http\Middleware\AuthorCheck::class,
-        'readerCheck' => \App\Http\Middleware\ReaderCheck::class,
+        'readerAuthorCheck' => \App\Http\Middleware\ReaderAuthorCheck::class,
     ];
 }

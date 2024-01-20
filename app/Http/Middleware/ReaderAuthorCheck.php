@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class ReaderCheck
+class ReaderAuthorCheck
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class ReaderCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->type!="reader"){
+        if(auth()->user()->type!="reader" && auth()->user()->type!="author"){
             return response()->json(['status' => 'You Are not allow to you to access that']);
         }
         return $next($request);

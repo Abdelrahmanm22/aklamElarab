@@ -42,6 +42,7 @@ class BookController extends Controller
             'description' => 'string|between:2,1000',
             'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
             'file' => 'required|mimes:pdf',
+            'trail'=>'required|mimes:pdf',
             'author_id' => 'required'
         ],[
             'name.required' => 'حقل الاسم مطلوب.',
@@ -51,7 +52,9 @@ class BookController extends Controller
             'image.image'=>'يجب أن تكون الصورة صورة.',
             'image.mimes'=>'يجب أن تكون الصورة ملفًا من النوع: jpg، png، jpeg، gif، svg.',
             'file.required'=>'حقل الملف مطلوب.',
-            'file.mimes' => 'يجب أن تكون الصورة ملفًا من النوع: jpg، png، jpeg، gif، svg.',
+            'file.mimes' => 'يجب ان يكون ملفا من النوع:PDF',
+            'trail.required'=>'حقل الملف التجريبي مطلوب.',
+            'trail.mimes' =>  'يجب ان يكون ملفا من النوع:PDF',
             'author_id.required' => 'حقل معرف المؤلف مطلوب.',
         ]);
 
@@ -60,14 +63,16 @@ class BookController extends Controller
         }
 
         ///move image and file
-        $imageName = $this->saveAttach($request->image, 'Attachment/Books/Images/' . $request->author_id);
-        $fileName = $this->saveAttach($request->file, 'Attachment/Books/Files/' . $request->author_id);
+        $imageName = $this->saveBook($request->image, 'Attachment/Books/Images/' . $request->author_id,$request->name);
+        $fileName = $this->saveBook($request->file, 'Attachment/Books/Files/' . $request->author_id,$request->name);
+        $trailName = $this->saveBook($request->trail,'Attachment/Books/Trail/',$request->author_id,$request->name); 
 
         $book = Book::create([
             'name' => $request->name,
             'description' => $request->description,
             'image' => $imageName,
             'file' => $fileName,
+            'trail'=> $trailName,
             'author_id' => $request->author_id,
             'admin_id' => auth()->user()->id,
         ]);

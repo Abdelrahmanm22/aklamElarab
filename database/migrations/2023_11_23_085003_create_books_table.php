@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('image');
             $table->string('file');
+            $table->string('trail');
             $table->decimal('rate',2,1)->default(0.0);///In the decimal method, the first argument is the column name, the second argument is the total number of digits, and the third argument is the number of digits after the decimal point.
             $table->bigInteger('view')->default(0);
             $table->unsignedBigInteger('author_id');
