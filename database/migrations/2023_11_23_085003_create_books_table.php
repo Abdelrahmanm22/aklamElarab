@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('trail');
             $table->decimal('rate',2,1)->default(0.0);///In the decimal method, the first argument is the column name, the second argument is the total number of digits, and the third argument is the number of digits after the decimal point.
             $table->bigInteger('view')->default(0);
+            $table->unsignedBigInteger('publisher_id');
+            $table->foreign('publisher_id')->references('id')->on('publishers')->onDelete('cascade');
             $table->unsignedBigInteger('author_id');
             $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('admin_id');

@@ -16,6 +16,7 @@ class Book extends Model
         'file',
         'rate',
         'view',
+        'publisher_id',
         'author_id',
         'admin_id',
     ];
@@ -23,6 +24,10 @@ class Book extends Model
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'book_category');
+    }
+
+    public function publisher(){
+        return $this->belongsTo('App\Models\Publisher','publisher_id');
     }
 
     public function author()

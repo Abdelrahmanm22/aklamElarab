@@ -119,6 +119,7 @@
                             <a href="https://github.com/sponsors/taylorotwell" class="ml-1 underline">
                                 Sponsor
                             </a>
+                            {{-- <a href="/auth/google" style="margin-top:0px !important; background:green;color:#ffffff; padding:5px; border-radius:7px;" class="ml-2" >Google Login</a> --}}
                         </div>
                     </div>
 

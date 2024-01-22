@@ -20,6 +20,10 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('type',['admin','author','reader']);
+            $table->date('birthDate')->nullable();
+            $table->enum('gender',['male','female'])->nullable();
+            $table->string('phone')->nullable();
+            $table->string('photo')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -74,22 +74,22 @@ class BookController extends Controller
             'file' => $fileName,
             'trail'=> $trailName,
             'author_id' => $request->author_id,
-            'admin_id' => auth()->user()->id,
+            'admin_id' => auth('api')->user()->id,
         ]);
 
         return $this->apiResponse($book, 'Book Added successfully', 201);
     }
 
-    ///function to get book with comments and its own reader
+    ///function to get book with comments and its own reader and and publisher
     public function getBook($id){
-        $book = Book::with(['comments.reader','author'])->find($id);
+        $book = Book::with(['comments.reader','author','publisher'])->find($id);
         return $this->apiResponse($book, 'ok', 200);
     }
 
     ///this function to increase views for book after pass one day
     public function open($id){    
         $view = Bookview::where('book_id', $id)
-            ->where('reader_id', auth()->user()->id)
+            ->where('reader_id', auth('api')->user()->id)
             ->first();
 
         if ($view) {
@@ -98,7 +98,7 @@ class BookController extends Controller
             $expirationDate = Carbon::now()->addMinutes(5);
             Bookview::create([
                 'book_id' => $id,
-                'reader_id'=>auth()->user()->id,
+                'reader_id'=>auth('api')->user()->id,
                 'expiration_date' => $expirationDate,
             ]);
             Book::incrementView($id);

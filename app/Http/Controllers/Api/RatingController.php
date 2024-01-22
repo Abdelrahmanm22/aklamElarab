@@ -11,7 +11,7 @@ class RatingController extends Controller
 {
     //
     public function getRating($book_id){
-        $userRating = Rating::getUserRating(auth()->user()->id, $book_id);
+        $userRating = Rating::getUserRating(auth('api')->user()->id, $book_id);
         // Now you can use $userRating as needed
         if ($userRating) {
             // User rating found
@@ -40,7 +40,7 @@ class RatingController extends Controller
         $rate = Rating::create([
             'rate'=>$request->rate,
             'book_id'=>$request->book_id,
-            'reader_id'=>auth()->user()->id,
+            'reader_id'=>auth('api')->user()->id,
         ]);
         Book::updateAverageRating($request->book_id);
         return $this->apiResponse($rate, 'Rate Added successfully', 201);
@@ -56,7 +56,7 @@ class RatingController extends Controller
         }
 
 
-        $rate=Rating::getUserRating(auth()->user()->id, $request->book_id);
+        $rate=Rating::getUserRating(auth('api')->user()->id, $request->book_id);
 
         $rate->update([
             'rate'=>$request->rate,

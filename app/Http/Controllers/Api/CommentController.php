@@ -22,7 +22,7 @@ class CommentController extends Controller
         $comment = Comment::create([
             'text'=>$request->text,
             'book_id'=>$request->book_id,
-            'reader_id'=>auth()->user()->id,
+            'reader_id'=>auth('api')->user()->id,
         ]);
 
         return $this->apiResponse($comment, 'Comment Added successfully', 201);

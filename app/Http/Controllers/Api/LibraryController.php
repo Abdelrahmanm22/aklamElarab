@@ -11,7 +11,7 @@ class LibraryController extends Controller
     //
 
     public function index(){
-        $library = Library::where('reader_id',auth()->user()->id)->first();
+        $library = Library::where('reader_id',auth('api')->user()->id)->first();
         $books = $library->books()->with('author')->get();
         return $this->apiResponse($books,"ok",200);
     }
@@ -19,7 +19,7 @@ class LibraryController extends Controller
     ///function to add book to library
     public function OpenBooKToLibrary($id){
         
-        $library = Library::where('reader_id',auth()->user()->id)->first();
+        $library = Library::where('reader_id',auth('api')->user()->id)->first();
 
         
         if($library->books->contains($id)){
@@ -35,7 +35,7 @@ class LibraryController extends Controller
     ///function to delete Book From Library
     public function delete($id)
     {
-        $user = auth()->user();
+        $user = auth('api')->user();
 
         // Find the library of the logged-in user
         $library = Library::where('reader_id', $user->id)->first();

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AdminController;
+use App\Http\Controllers\Api\AdvertisementController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AuthorController;
 use App\Http\Controllers\Api\BookController;
@@ -41,9 +42,6 @@ Route::group(['middleware'=>'jwt.verify'],function(){
 
     ///Routes For Admin only
     Route::group(['middleware'=>'adminCheck'],function(){
-        Route::post('/addAuthor',[AdminController::class,'addAuthor']);
-        Route::get('/getUsers',[AdminController::class,'getAllUsers']);
-        Route::get('/getAuthors',[AdminController::class,'getAuthors']);
         Route::post('/addBook',[BookController::class,'create']);
         Route::get('/allBook', [BookController::class, 'index']);
     });
@@ -72,7 +70,7 @@ Route::group(['middleware'=>'jwt.verify'],function(){
         Route::get('/categories',[CategoryController::class,'index']);
         Route::get('/category/{id}',[CategoryController::class,'getCategory']);
         Route::get('/search/{word}',[SearchController::class,'search']);
+        Route::get('/authorProfile/{id}',[AuthorController::class,'getAuthor']);
+        Route::get('/advertisements',[AdvertisementController::class,'index']);
     });
-
-
 });
