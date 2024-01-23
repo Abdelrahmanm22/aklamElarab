@@ -90,11 +90,21 @@
                       </a>
                   </li>
                   <li class="nav-item">
+                    <a href="{{ route('book') }}" class="nav-link">
+
+                        <i class="fas fa-book"></i>
+                        <p>
+                            Books
+                            {{-- <span class="right badge badge-danger">New</span> --}}
+                        </p>
+                    </a>
+                </li>
+                  <li class="nav-item">
                       <a href="{{ route('advertisement') }}" class="nav-link">
 
                           <i class="fas fa-bullhorn"></i>
                           <p>
-                              Advertisement
+                              Advertisements
                               {{-- <span class="right badge badge-danger">New</span> --}}
                           </p>
                       </a>

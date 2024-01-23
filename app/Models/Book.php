@@ -14,6 +14,7 @@ class Book extends Model
         'description',
         'image',
         'file',
+        'trail',
         'rate',
         'view',
         'publisher_id',
@@ -33,6 +34,10 @@ class Book extends Model
     public function author()
     {
         return $this->belongsTo('App\Models\User', 'author_id');
+    }
+
+    public function admin(){
+        return $this->belongsTo('App\Models\User','admin_id');
     }
 
     public function comments()

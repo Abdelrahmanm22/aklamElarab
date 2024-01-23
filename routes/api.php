@@ -42,7 +42,7 @@ Route::group(['middleware'=>'jwt.verify'],function(){
 
     ///Routes For Admin only
     Route::group(['middleware'=>'adminCheck'],function(){
-        Route::post('/addBook',[BookController::class,'create']);
+        // Route::post('/addBook',[BookController::class,'create']);
         Route::get('/allBook', [BookController::class, 'index']);
     });
 

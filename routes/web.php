@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Web\AdminController;
 use App\Http\Controllers\Web\AdvertisementController;
 use App\Http\Controllers\Web\AuthorController;
+use App\Http\Controllers\Web\BookController;
 use App\Http\Controllers\Web\CategoryController;
 use App\Http\Controllers\Web\PublisherController;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,13 @@ Route::group(['prefix'=>'dashboard','middleware'=>'auth'],function(){
         Route::get('/store',[CategoryController::class,'store'])->name('category.store');
         Route::post('/create',[CategoryController::class,'create'])->name('category.create');
         Route::post('/delete',[CategoryController::class,'delete'])->name('category.delete');
+    });
+
+    Route::group(['prefix'=>'book'],function(){
+        Route::get('/',[BookController::class,'index'])->name('book');
+        Route::get('/store',[BookController::class,'store'])->name('book.store');
+        Route::post('/create',[BookController::class,'create'])->name('book.create');
+        Route::post('/delete',[BookController::class,'delete'])->name('book.delete');
     });
 
     Route::group(['prefix'=>'advertisement'],function(){

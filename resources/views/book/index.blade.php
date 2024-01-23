@@ -16,12 +16,12 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     {{-- <h1 class="m-0">Dashboard</h1> --}}
-                    <a href="{{ route('advertisement.store') }}" class="btn btn-success">Add Advertisement</a>
+                    <a href="{{ route('book.store') }}" class="btn btn-success">Add Book</a>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Advertisement</li>
+                        <li class="breadcrumb-item active">Book</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -50,7 +50,7 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">DataTable For All Advertisement</h3>
+                    <h3 class="card-title">DataTable For All Books</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -58,25 +58,46 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Advertisement Image</th>
-                                <th>Admen Name</th>
+                                <th>Book Image</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Rate</th>
+                                <th>Views</th>
+                                <th>Publisher</th>
+                                <th>Admin Name</th>
                                 <th>Created At</th>
                                 <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($advertisement as $a)
+                            @foreach ($book as $b)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>
-                                        <img src="{{URL::asset('Attachment/Advertisement/'.$a->img)}}" width="200"  alt="advertisement image">
+                                        <img src="{{ URL::asset('Attachment/Books/Images/' .$b->author_id.'/'. $b->image) }}" width="200"
+                                            alt="book image">
                                     </td>
-                                    <td>{{ $a->admin->name }}</td>
-                                    <td>{{ $a->created_at }}</td>
+                                    <td>{{ $b->name }}</td>
+                                    <td>{{ $b->description }}</td>
+                                    <td>{{ $b->rate }}</td>
                                     <td>
-                                        <a class="btn btn-danger delete-advertisement" data-toggle="modal"
-                                            data-target="#deleteAdvertisementModal"
-                                            data-advertisement-id="{{ $a->id }}">Delete</a>
+                                        @php
+                                            if ($b->view < 1000) {
+                                                echo $b->view;
+                                            } elseif ($b->view < 1000000) {
+                                                echo round($b->view / 1000, 1) . 'K';
+                                            } else {
+                                                echo round($b->view / 1000000, 1) . 'M';
+                                            }
+                                        @endphp
+                                    </td>
+                                    <td>{{ $b->publisher->name }}</td>
+                                    <td>{{ $b->admin->name }}</td>
+                                    <td>{{ $b->created_at }}</td>
+                                    <td>
+                                        <a class="btn btn-danger delete-book" data-toggle="modal"
+                                            data-target="#deleteBookModal"
+                                            data-book-id="{{ $b->id }}">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -84,8 +105,13 @@
                         <tfoot>
                             <tr>
                                 <th>#</th>
-                                <th>Publisher Name</th>
-                                <th>Admen Name</th>
+                                <th>Book Image</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Rate</th>
+                                <th>Views</th>
+                                <th>Publisher</th>
+                                <th>Admin Name</th>
                                 <th>Created At</th>
                                 <th>Delete</th>
                             </tr>
@@ -96,23 +122,24 @@
             </div>
 
             <!-- Delete Category Modal -->
-            <div class="modal fade" id="deleteAdvertisementModal" tabindex="-1" role="dialog"
-                aria-labelledby="deleteAdvertisementModalLabel" aria-hidden="true">
+            <div class="modal fade" id="deleteBookModal" tabindex="-1" role="dialog"
+                aria-labelledby="deleteBookModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="deleteAdvertisementModalLabel">Delete Advertisement</h5>
+                            <h5 class="modal-title" id="deleteBookModalLabel">Delete Book</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form id="deleteAdvertisementForm" method="POST" action="{{ url('dashboard/advertisement/delete/') }}">
+                        <form id="deleteBookForm" method="POST"
+                            action="{{ url('dashboard/book/delete/') }}">
                             @csrf
                             @method('POST')
                             <div class="modal-body">
-                                <p>Are you sure you want to delete this Advertisement?</p>
-                                
-                                <input type="hidden" name="advertisement_id" id="deleteAdvertisementId" value="">
+                                <p>Are you sure you want to delete this Book?</p>
+
+                                <input type="hidden" name="book_id" id="deleteBookId" value="">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -146,15 +173,15 @@
         $(function() {
 
             // Handle delete button click
-            $('.delete-advertisement').on('click', function() {
+            $('.delete-book').on('click', function() {
                 // Get the publisher ID from the data attribute
-                var advertisementId = $(this).data('advertisement-id');
+                var bookId = $(this).data('book-id');
 
                 // Set the publisher ID in the form
-                $('#deleteAdvertisementId').val(advertisementId);
+                $('#deleteBookId').val(bookId);
 
                 // Show the modal
-                $('#deleteAdvertisementIdModal').modal('show');
+                $('#deleteBookIdModal').modal('show');
             });
             // setting for table
             $("#example1").DataTable({

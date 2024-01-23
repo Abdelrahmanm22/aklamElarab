@@ -66,7 +66,7 @@
                                 <!-- text input -->
                                 <div class="form-group">
                                     <label>* Password</label>
-                                    <input type="text" name="password" class="form-control" value=""
+                                    <input type="password" name="password" class="form-control" value=""
                                         placeholder="Enter ...">
                                     @error('password')
                                         <small class="form-txt text-danger">{{ $message }}</small>
@@ -77,7 +77,7 @@
                                 <!-- text input -->
                                 <div class="form-group">
                                     <label>* Confirm Password</label>
-                                    <input type="text" name="password_confirmation" class="form-control" value=""
+                                    <input type="password" name="password_confirmation" class="form-control" value=""
                                         placeholder="Enter ...">
 
                                 </div>
@@ -87,7 +87,7 @@
                             <div class="col-sm-4">
                                 <!-- text input -->
                                 <div class="form-group">
-                                    <label>Birth Date </label>
+                                    <label>* Birth Date </label>
                                     <input type="date" name="birthDate" class="form-control" value=""
                                         placeholder="Enter ...">
                                     @error('birthDate')
@@ -97,7 +97,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <label>Phone </label>
+                                    <label>* Phone </label>
                                     <input type="text" name="phone" class="form-control" value=""
                                         placeholder="Enter ...">
                                     @error('phone')
@@ -172,19 +172,6 @@
                                 @enderror
                             </div>
                         </div>
-
-                        {{-- <div class="row">
-                            <div class="col-sm-6">
-                                <!-- textarea -->
-                                <div class="form-group">
-                                    <label>Description Of Plan</label>
-                                    <textarea name="Description" class="form-control" rows="3" placeholder="Enter ...">{{ $plan->title }}</textarea>
-                                    @error('Description')
-                                        <small class="form-txt text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div> --}}
 
                         <div class="card-footer">
                             <button type="submit" class="btn btn-success">Add</button>

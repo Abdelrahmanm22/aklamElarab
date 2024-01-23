@@ -14,10 +14,10 @@ class BookController extends Controller
     //
     use AttachmentTrait;
 
-    public function index(){
-        $books = Book::select('id', 'name', 'description', 'image', 'file', 'rate', 'created_at')->get();
-        return $this->apiResponse($books, 'ok', 200);
-    }
+    // public function index(){
+    //     $books = Book::select('id', 'name', 'description', 'image', 'file', 'rate', 'created_at')->get();
+    //     return $this->apiResponse($books, 'ok', 200);
+    // }
 
     public function getLatest(){
         $books = Book::select('id', 'name', 'description', 'image', 'file', 'rate', 'created_at')
@@ -36,49 +36,49 @@ class BookController extends Controller
         return $this->apiResponse($books, 'ok', 200);
     }
 
-    public function create(Request $request){
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|between:2,100',
-            'description' => 'string|between:2,1000',
-            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
-            'file' => 'required|mimes:pdf',
-            'trail'=>'required|mimes:pdf',
-            'author_id' => 'required'
-        ],[
-            'name.required' => 'حقل الاسم مطلوب.',
-            'name.between' =>'يجب أن يتراوح الاسم بين 2 و100 حرف.',
-            'description.between' => 'يجب أن يتراوح الاسم بين 2 و1000 حرف.',
-            'image.required' => 'حقل الصورة مطلوب.',
-            'image.image'=>'يجب أن تكون الصورة صورة.',
-            'image.mimes'=>'يجب أن تكون الصورة ملفًا من النوع: jpg، png، jpeg، gif، svg.',
-            'file.required'=>'حقل الملف مطلوب.',
-            'file.mimes' => 'يجب ان يكون ملفا من النوع:PDF',
-            'trail.required'=>'حقل الملف التجريبي مطلوب.',
-            'trail.mimes' =>  'يجب ان يكون ملفا من النوع:PDF',
-            'author_id.required' => 'حقل معرف المؤلف مطلوب.',
-        ]);
+    // public function create(Request $request){
+    //     $validator = Validator::make($request->all(), [
+    //         'name' => 'required|string|between:2,100',
+    //         'description' => 'string|between:2,1000',
+    //         'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
+    //         'file' => 'required|mimes:pdf',
+    //         'trail'=>'required|mimes:pdf',
+    //         'author_id' => 'required'
+    //     ],[
+    //         'name.required' => 'حقل الاسم مطلوب.',
+    //         'name.between' =>'يجب أن يتراوح الاسم بين 2 و100 حرف.',
+    //         'description.between' => 'يجب أن يتراوح الاسم بين 2 و1000 حرف.',
+    //         'image.required' => 'حقل الصورة مطلوب.',
+    //         'image.image'=>'يجب أن تكون الصورة صورة.',
+    //         'image.mimes'=>'يجب أن تكون الصورة ملفًا من النوع: jpg، png، jpeg، gif، svg.',
+    //         'file.required'=>'حقل الملف مطلوب.',
+    //         'file.mimes' => 'يجب ان يكون ملفا من النوع:PDF',
+    //         'trail.required'=>'حقل الملف التجريبي مطلوب.',
+    //         'trail.mimes' =>  'يجب ان يكون ملفا من النوع:PDF',
+    //         'author_id.required' => 'حقل معرف المؤلف مطلوب.',
+    //     ]);
 
-        if ($validator->fails()) {
-            return $this->apiResponse(null, $validator->errors(), 400);
-        }
+    //     if ($validator->fails()) {
+    //         return $this->apiResponse(null, $validator->errors(), 400);
+    //     }
 
-        ///move image and file
-        $imageName = $this->saveBook($request->image, 'Attachment/Books/Images/' . $request->author_id,$request->name);
-        $fileName = $this->saveBook($request->file, 'Attachment/Books/Files/' . $request->author_id,$request->name);
-        $trailName = $this->saveBook($request->trail,'Attachment/Books/Trail/',$request->author_id,$request->name); 
+    //     ///move image and file
+    //     $imageName = $this->saveBook($request->image, 'Attachment/Books/Images/' . $request->author_id,$request->name);
+    //     $fileName = $this->saveBook($request->file, 'Attachment/Books/Files/' . $request->author_id,$request->name);
+    //     $trailName = $this->saveBook($request->trail,'Attachment/Books/Trail/',$request->author_id,$request->name); 
 
-        $book = Book::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'image' => $imageName,
-            'file' => $fileName,
-            'trail'=> $trailName,
-            'author_id' => $request->author_id,
-            'admin_id' => auth('api')->user()->id,
-        ]);
+    //     $book = Book::create([
+    //         'name' => $request->name,
+    //         'description' => $request->description,
+    //         'image' => $imageName,
+    //         'file' => $fileName,
+    //         'trail'=> $trailName,
+    //         'author_id' => $request->author_id,
+    //         'admin_id' => auth('api')->user()->id,
+    //     ]);
 
-        return $this->apiResponse($book, 'Book Added successfully', 201);
-    }
+    //     return $this->apiResponse($book, 'Book Added successfully', 201);
+    // }
 
     ///function to get book with comments and its own reader and and publisher
     public function getBook($id){

@@ -11,7 +11,8 @@ trait AttachmentTrait{
     }
     
     function saveBook($file,$folderPath,$fileName){ ///عشان اخزن اسم الفايل علي السيرفر بنفس اسمه
-        $original_name = $fileName;
+        
+        $original_name = $fileName.'.pdf';
         $attach_file_name = $original_name;
         $avatar_path = $folderPath;
         $file->move(public_path($avatar_path),$attach_file_name);
