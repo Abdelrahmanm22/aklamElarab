@@ -7,6 +7,7 @@ use App\Http\Controllers\Web\AuthorController;
 use App\Http\Controllers\Web\BookController;
 use App\Http\Controllers\Web\CategoryController;
 use App\Http\Controllers\Web\PublisherController;
+use App\Http\Controllers\Web\ReaderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,6 +60,10 @@ Route::group(['prefix'=>'dashboard','middleware'=>'auth'],function(){
         Route::get('/',[AuthorController::class,'index'])->name('author');
         Route::get('/store',[AuthorController::class,'store'])->name('author.store');
         Route::post('/create',[AuthorController::class,'create'])->name('author.create');
+    });
+
+    Route::group(['prefix'=>'reader'],function(){
+        Route::get('/',[ReaderController::class,'index'])->name('reader');
     });
 });
 
