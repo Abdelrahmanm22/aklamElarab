@@ -43,7 +43,7 @@
                                 <div class="form-group">
                                     <label>* Name </label>
                                     <input type="text" name="name" class="form-control" value=""
-                                        placeholder="Enter ...">
+                                        placeholder="Enter ..."  autocomplete="off">
                                     @error('name')
                                         <small class="form-txt text-danger">{{ $message }}</small>
                                     @enderror
@@ -54,7 +54,7 @@
                                 <div class="form-group">
                                     <label>* Email</label>
                                     <input type="text" name="email" class="form-control" value=""
-                                        placeholder="Enter ...">
+                                        placeholder="Enter ..." autocomplete="off">
                                     @error('email')
                                         <small class="form-txt text-danger">{{ $message }}</small>
                                     @enderror
@@ -67,7 +67,7 @@
                                 <div class="form-group">
                                     <label>* Password</label>
                                     <input type="password" name="password" class="form-control" value=""
-                                        placeholder="Enter ...">
+                                        placeholder="Enter ..."  autocomplete="off">
                                     @error('password')
                                         <small class="form-txt text-danger">{{ $message }}</small>
                                     @enderror
@@ -78,7 +78,7 @@
                                 <div class="form-group">
                                     <label>* Confirm Password</label>
                                     <input type="password" name="password_confirmation" class="form-control" value=""
-                                        placeholder="Enter ...">
+                                        placeholder="Enter ..."  autocomplete="off">
 
                                 </div>
                             </div>
@@ -89,7 +89,7 @@
                                 <div class="form-group">
                                     <label>* Birth Date </label>
                                     <input type="date" name="birthDate" class="form-control" value=""
-                                        placeholder="Enter ...">
+                                        placeholder="Enter ..." autocomplete="off">
                                     @error('birthDate')
                                         <small class="form-txt text-danger">{{ $message }}</small>
                                     @enderror
@@ -99,7 +99,7 @@
                                 <div class="form-group">
                                     <label>* Phone </label>
                                     <input type="text" name="phone" class="form-control" value=""
-                                        placeholder="Enter ...">
+                                        placeholder="Enter ..." autocomplete="off">
                                     @error('phone')
                                         <small class="form-txt text-danger">{{ $message }}</small>
                                     @enderror
@@ -109,7 +109,7 @@
                                 <!-- file input -->
                                 <div class="form-group">
                                     <label>Image Profile</label>
-                                    <input type="file" name="photo" class="form-control">
+                                    <input type="file" name="photo" autocomplete="off" class="form-control">
                                     @error('photo')
                                         <small class="form-txt text-danger">{{ $message }}</small>
                                     @enderror
@@ -122,7 +122,7 @@
                                 <div class="form-group">
                                     <label>Facebook Link</label>
                                     <input type="text" name="facebook" class="form-control" value=""
-                                        placeholder="Enter ...">
+                                        placeholder="Enter ..."  autocomplete="off">
                                     @error('facebook')
                                         <small class="form-txt text-danger">{{ $message }}</small>
                                     @enderror
@@ -133,7 +133,7 @@
                                 <div class="form-group">
                                     <label>Twitter Link</label>
                                     <input type="text" name="twitter" class="form-control" value=""
-                                        placeholder="Enter ...">
+                                        placeholder="Enter ..."  autocomplete="off">
                                     @error('twitter')
                                         <small class="form-txt text-danger">{{ $message }}</small>
                                     @enderror
@@ -145,7 +145,7 @@
                                 <!-- textarea -->
                                 <div class="form-group">
                                     <label>About the Author</label>
-                                    <textarea name="about" maxlength="2000" class="form-control" placeholder="Enter ..."></textarea>
+                                    <textarea name="about" maxlength="2000" class="form-control" placeholder="Enter ..."  autocomplete="off" ></textarea>
                                     @error('about')
                                         <small class="form-txt text-danger">{{ $message }}</small>
                                     @enderror

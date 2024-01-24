@@ -60,6 +60,8 @@ Route::group(['prefix'=>'dashboard','middleware'=>'auth'],function(){
         Route::get('/',[AuthorController::class,'index'])->name('author');
         Route::get('/store',[AuthorController::class,'store'])->name('author.store');
         Route::post('/create',[AuthorController::class,'create'])->name('author.create');
+        Route::get('/edit/{id}',[AuthorController::class,'edit'])->name('author.edit');
+        // Route::post('/update',[AuthorController::class,'update'])->name('author.update');
     });
 
     Route::group(['prefix'=>'reader'],function(){

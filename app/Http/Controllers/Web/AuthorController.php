@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Book;
+use App\Models\Library;
 use App\Models\Related;
 use App\Models\User;
 use App\Trait\AttachmentTrait;
@@ -31,7 +32,7 @@ class AuthorController extends Controller
             'password' => 'required|string|confirmed|min:6',
             'birthDate'=> 'required|date',
             'gender' => ['required', 'in:0,1'], // male:1 -- female 0
-            'phone'=>'required|numeric|digits:11',
+            'phone'=>'required|numeric',
             'photo'=>'image|mimes:jpeg,png,jpg,gif',
             'about'=> 'max:2000',
             'facebook'=>'',
@@ -62,6 +63,9 @@ class AuthorController extends Controller
             ]
         ));
 
+        //create library for author in application
+        Library::createLibrary($user->id);
+
         Related::create([
             'author_id'=>$user->id,
             'facebook'=>$request->facebook,
@@ -70,5 +74,17 @@ class AuthorController extends Controller
         ]);
         
         return redirect()->route('author')->with('success', 'Created Author Successfully');
+    }
+
+    public function edit($id){
+
+        $author = User::with('related','books')->find($id);
+        if(!$author){
+            return redirect()->route('author')->with('error', 'Author not found');
+        }
+
+        // return $author;
+
+        return view('author.edit',compact('author'))->with('title','Author Profile');
     }
 }

@@ -37,6 +37,14 @@
             </button>
         </div>
     @endif
+    @if (Session::has('error'))
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            {{ Session::get('error') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <section class="content">
         <div class="container-fluid">
             <div class="card">
@@ -55,6 +63,7 @@
                                 <th>Percentage of views</th>
                                 <th>Number of Books</th>
                                 <th>Added At</th>
+                                <th>Operation</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -78,6 +87,7 @@
                                             data-target="#deleteAdvertisementModal"
                                             data-advertisement-id="{{ $a->id }}">Delete</a>
                                     </td> --}}
+                                    <td><a href="{{url('dashboard/author/edit/'.$a->id)}}" class="btn btn-default">show profile</a></td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -90,6 +100,7 @@
                                 <th>Percentage of views</th>
                                 <th>Number of Books</th>
                                 <th>Added At</th>
+                                <th>Operation</th>
                             </tr>
                         </tfoot>
                     </table>

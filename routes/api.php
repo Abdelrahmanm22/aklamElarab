@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\LibraryController;
 use App\Http\Controllers\Api\MarkController;
 use App\Http\Controllers\Api\RatingController;
 use App\Http\Controllers\Api\SearchController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -41,10 +42,10 @@ Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
 Route::group(['middleware'=>'jwt.verify'],function(){
 
     ///Routes For Admin only
-    Route::group(['middleware'=>'adminCheck'],function(){
-        // Route::post('/addBook',[BookController::class,'create']);
-        Route::get('/allBook', [BookController::class, 'index']);
-    });
+    // Route::group(['middleware'=>'adminCheck'],function(){
+    //     Route::post('/addBook',[BookController::class,'create']);
+    //     Route::get('/allBook', [BookController::class, 'index']);
+    // });
 
     ///Routes For Author only
     Route::group(['middleware'=>'authorCheck'],function(){
@@ -53,6 +54,8 @@ Route::group(['middleware'=>'jwt.verify'],function(){
 
     ///Routes For Author and Reader (together)
     Route::group(['middleware'=>'readerAuthorCheck'],function(){
+        Route::post('/updateInfo',[UserController::class,'update']);
+        Route::post('/updateImage',[UserController::class,'updateImage']);
         Route::get('/allBooks', [BookController::class, 'index']);
         Route::get('/latestBooks',[BookController::class,'getLatest']);
         Route::get('/highestBooks',[BookController::class,'getHighestRate']);
