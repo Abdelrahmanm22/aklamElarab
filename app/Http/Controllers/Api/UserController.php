@@ -16,7 +16,7 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|between:2,100',
             'birthDate'=> 'nullable|date',
-            'gender' => ['in:0,1'], // male:1 -- female 0
+            'gender' => ['in:0,1,2'], // 0: female, 1: male, 2: another gender
             'phone'=>'numeric',
         ]);
         if ($validator->fails()) {
@@ -30,7 +30,7 @@ class UserController extends Controller
             
             if($request->gender==1){
                 $gender="male";
-            }else{
+            }elseif ($request->gender==0){
                 $gender="female";
             }
         }
