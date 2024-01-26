@@ -67,6 +67,10 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                                $totalViews = \App\Models\Book::sum('view') ?: 1; // Ensure that $totalViews is not zero to avoid division by zero
+                            @endphp
+
                             @foreach ($authors as $a)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
@@ -75,7 +79,6 @@
                                     <td>{{ $a->phone }}</td>
                                     <td>
                                         @php
-                                            $totalViews = $totalViews ?: 1; // Ensure that $totalViews is not zero to avoid division by zero
                                             $percentage = ($a->books()->sum('view') / $totalViews) * 100;
                                             echo round($percentage, 2) . '%';
                                         @endphp
@@ -87,7 +90,8 @@
                                             data-target="#deleteAdvertisementModal"
                                             data-advertisement-id="{{ $a->id }}">Delete</a>
                                     </td> --}}
-                                    <td><a href="{{url('dashboard/author/edit/'.$a->id)}}" class="btn btn-default">show profile</a></td>
+                                    <td><a href="{{ url('dashboard/author/edit/' . $a->id) }}" class="btn btn-default">show
+                                            profile</a></td>
                                 </tr>
                             @endforeach
                         </tbody>

@@ -16,8 +16,7 @@ class AuthorController extends Controller
     use AttachmentTrait;
     public function index(){
         $authors = User::where('type','=','author')->get();
-        $totalViews = Book::sum('view');
-        return view('author.index',compact(['authors','totalViews']))->with('title','Authors');
+        return view('author.index',compact(['authors']))->with('title','Authors');
     }
 
     public function store(){

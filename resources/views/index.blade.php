@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-{{$title}}
+    {{ $title }}
 @stop
 
 @section('css')
@@ -28,7 +28,33 @@
 @section('content')
     <section class="content">
         <div class="container-fluid">
-            
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- BAR CHART -->
+                    <div class="card card-dark">
+                        <div class="card-header">
+                            <h3 class="card-title"> Top 5 Authors depend on views</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                {{-- <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                    <i class="fas fa-times"></i>
+                                </button> --}}
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart" style="width:90%;">
+                                {!! $chartjs->render() !!}
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                
+            </div>
         </div><!-- /.container-fluid -->
     </section>
 @endsection

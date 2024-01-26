@@ -63,6 +63,7 @@
                                 <th>Description</th>
                                 <th>Rate</th>
                                 <th>Views</th>
+                                <th>Author Name</th>
                                 <th>Publisher</th>
                                 <th>Admin Name</th>
                                 <th>Created At</th>
@@ -91,6 +92,7 @@
                                             }
                                         @endphp
                                     </td>
+                                    <td>{{ $b->author->name }}</td>
                                     <td>{{ $b->publisher->name }}</td>
                                     <td>{{ $b->admin->name }}</td>
                                     <td>{{ $b->created_at }}</td>
@@ -110,6 +112,7 @@
                                 <th>Description</th>
                                 <th>Rate</th>
                                 <th>Views</th>
+                                <th>Author Name</th>
                                 <th>Publisher</th>
                                 <th>Admin Name</th>
                                 <th>Created At</th>
