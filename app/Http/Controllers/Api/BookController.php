@@ -15,7 +15,8 @@ class BookController extends Controller
     use AttachmentTrait;
 
     public function index(){
-        $books = Book::select('id', 'name', 'description', 'image', 'file', 'rate', 'created_at')->get();
+        $books = Book::select('id', 'name', 'description', 'image', 'file', 'rate', 'created_at')
+            ->paginate(20); // You can specify the number of items per page, for example, 10.
         return $this->apiResponse($books, 'ok', 200);
     }
 
