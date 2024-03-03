@@ -63,12 +63,23 @@ class User extends Authenticatable implements JWTSubject
      */
     public function getJWTCustomClaims() {
         return [];
-    } 
+    }
 
+    ////////////////////////////////////////////Author ORM////////////////////////////////////////
     public function books(){
         return $this->hasMany('App\Models\Book','author_id','id');
     }
 
+    public function related(){
+        return $this->hasOne('App\Models\Related','author_id');
+    }
+    ////////////////////////////////////////////Author ORM////////////////////////////////////////
+
+
+
+
+
+    ////////////////////////////////////////////Reader ORM////////////////////////////////////////
     public function comments(){
         return $this->hasMany('App\Models\Comment','reader_id','id');
     }
@@ -84,12 +95,15 @@ class User extends Authenticatable implements JWTSubject
     public function library(){
         return $this->hasOne('App\Models\Library','reader_id');
     }
+    ////////////////////////////////////////////Reader ORM////////////////////////////////////////
 
-    public function related(){
-        return $this->hasOne('App\Models\Related','author_id');
-    }
 
+
+
+
+    ////////////////////////////////////////////Admin ORM////////////////////////////////////////
     public function advertisement(){
         return $this->hasMany('App\Models\Advertisement','admin_id');
     }
+    ////////////////////////////////////////////Admin ORM////////////////////////////////////////
 }

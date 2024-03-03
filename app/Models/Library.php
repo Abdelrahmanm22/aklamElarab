@@ -20,6 +20,8 @@ class Library extends Model
     {
         return $this->belongsToMany(Book::class,'library_book');
     }
+
+    ///function to create library once create Author or Reader
     public static function createLibrary($id){
         Library::create([
             'reader_id'=>$id,

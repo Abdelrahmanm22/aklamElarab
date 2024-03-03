@@ -73,7 +73,7 @@
                       <a href="{{ route('publisher') }}" class="nav-link">
 
                           <i class="fas fa-building"></i>
-                          <p>
+                          <p style="margin-left: 10px;">
                               Publishing House
                               {{-- <span class="right badge badge-danger">New</span> --}}
                           </p>
@@ -83,7 +83,7 @@
                       <a href="{{ route('category') }}" class="nav-link">
 
                           <i class="fas fa-folder"></i>
-                          <p>
+                          <p style="margin-left: 10px;">
                               Categories
                               {{-- <span class="right badge badge-danger">New</span> --}}
                           </p>
@@ -93,7 +93,7 @@
                     <a href="{{ route('book') }}" class="nav-link">
 
                         <i class="fas fa-book"></i>
-                        <p>
+                        <p style="margin-left: 10px;">
                             Books
                             {{-- <span class="right badge badge-danger">New</span> --}}
                         </p>
@@ -103,7 +103,7 @@
                       <a href="{{ route('advertisement') }}" class="nav-link">
 
                           <i class="fas fa-bullhorn"></i>
-                          <p>
+                          <p style="margin-left: 10px;">
                               Advertisements
                               {{-- <span class="right badge badge-danger">New</span> --}}
                           </p>
@@ -112,7 +112,7 @@
                   <li class="nav-item">
                       <a href="#" class="nav-link">
                         <i class="fas fa-user"></i>
-                          <p>
+                          <p style="margin-left: 10px;">
                               Users
                               <i class="fas fa-angle-left right"></i>
                               <span class="badge badge-info right">2</span>
@@ -131,7 +131,7 @@
                                   <p>Readers</p>
                               </a>
                           </li>
-                          
+
                       </ul>
                   </li>
 

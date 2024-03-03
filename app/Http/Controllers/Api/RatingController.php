@@ -15,7 +15,7 @@ class RatingController extends Controller
         // Now you can use $userRating as needed
         if ($userRating) {
             // User rating found
-            return $this->apiResponse($userRating,'User rating found',200); // Assuming there is a 
+            return $this->apiResponse($userRating,'User rating found',200); // Assuming there is a
         } else {
             // User rating not found
             // Handle the case where the user hasn't rated the book

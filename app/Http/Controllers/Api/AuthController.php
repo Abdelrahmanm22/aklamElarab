@@ -37,7 +37,6 @@ class AuthController extends Controller
             'password.min'=> 'يجب أن تتكون كلمة المرور من ٦ أحرف على الأقل.'
         ]);
         if ($validator->fails()) {
-            // return response()->json($validator->errors(), 422);
             return $this->apiResponse(null,$validator->errors(),400);
         }
         if (!$token = auth()->guard('api')->attempt($validator->validated())) {
@@ -67,7 +66,7 @@ class AuthController extends Controller
             'password.min'=> 'يجب أن تتكون كلمة المرور من ٦ أحرف على الأقل.'
         ]);
         if ($validator->fails()) {
-            // return response()->json($validator->errors()->toJson(), 400);
+
             return $this->apiResponse(null,$validator->errors(),400);
         }
         $user = User::create(array_merge(
@@ -79,10 +78,7 @@ class AuthController extends Controller
         ));
 
         Library::createLibrary($user->id);
-        // return response()->json([
-        //     'message' => 'User successfully registered',
-        //     'user' => $user
-        // ], 201);
+
         return $this->apiResponse($user,'User successfully registered',201);
     }
 
@@ -112,7 +108,7 @@ class AuthController extends Controller
      */
     public function userProfile()
     {
-        return response()->json(auth()->user());
+        return response()->json(auth('api')->user());
     }
     /**
      * Get the token array structure.
@@ -123,7 +119,7 @@ class AuthController extends Controller
      */
     protected function createNewToken($token)
     {
-        
+
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',

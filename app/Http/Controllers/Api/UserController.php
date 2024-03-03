@@ -23,11 +23,11 @@ class UserController extends Controller
             return $this->apiResponse(null, $validator->errors(), 400);
         }
 
-        
+
         ///gender validate
         $gender=null;
         if($request->gender!=null){
-            
+
             if($request->gender==1){
                 $gender="male";
             }elseif ($request->gender==0){
@@ -59,21 +59,21 @@ class UserController extends Controller
         if ($validator->fails()) {
             return $this->apiResponse(null, $validator->errors(), 400);
         }
-        
+
         //to delete last image
         $user = User::find(auth('api')->user()->id);
-        
+
             // Get the image path
-            $imagePath = public_path('Attachment/Users/Authors/') . $user->photo;
+            $imagePath = public_path('Attachment/Users/') . $user->photo;
             // return $imagePath;
             // Check if the file exists before attempting to delete it
             if (file_exists($imagePath) and $user->photo!=null) {
             // Delete the image file
                 unlink($imagePath);
-            }    
-            
-        $imageName = $this->saveAttach($request->photo,"Attachment/Users/Authors/");
-        
+            }
+
+        $imageName = $this->saveAttach($request->photo,"Attachment/Users/");
+
         $user->update([
             'photo'=>$imageName,
         ]);

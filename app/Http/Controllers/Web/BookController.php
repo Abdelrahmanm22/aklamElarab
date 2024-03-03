@@ -70,8 +70,6 @@ class BookController extends Controller
 
         return redirect()->route('book')->with('success', 'Created Book Successfully');
     }
-
-
     public function delete(Request $request)
     {
         $book = Book::find($request->book_id);

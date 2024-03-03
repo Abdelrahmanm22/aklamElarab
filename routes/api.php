@@ -35,7 +35,7 @@ Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::get('/user-profile', [AuthController::class, 'userProfile']);    
+    Route::get('/user-profile', [AuthController::class, 'userProfile']);
 });
 
 
@@ -63,16 +63,16 @@ Route::group(['middleware'=>'jwt.verify'],function(){
         Route::get('/getBook/{id}',[BookController::class,'getBook']);
         Route::get('/getRate/{book_id}',[RatingController::class,'getRating']);
         Route::post('/makeRate',[RatingController::class,'create']);
-        Route::post('/updateRate',[RatingController::class,'update']);
+        Route::put('/updateRate',[RatingController::class,'update']);
         Route::get('/increaseViews/{id}',[BookController::class,'open']);
         Route::get('/getLibrary',[LibraryController::class,'index']);
-        Route::get('/addtoLibrary/{id}',[LibraryController::class,'OpenBooKToLibrary']);
-        Route::get('/deleteFromLibrary/{id}',[LibraryController::class,'delete']);
+        Route::post('/addtoLibrary',[LibraryController::class,'OpenBooKToLibrary']);
+        Route::delete('/deleteFromLibrary',[LibraryController::class,'delete']);
         Route::get('/openBook/{bookId}',[MarkController::class,'open']);
-        Route::post('/closeBook',[MarkController::class,'close']);
+        Route::put('/closeBook',[MarkController::class,'close']);
         Route::get('/categories',[CategoryController::class,'index']);
         Route::get('/category/{id}',[CategoryController::class,'getCategory']);
-        Route::get('/search/{word}',[SearchController::class,'search']);
+        Route::post('/search',[SearchController::class,'search']);
         Route::get('/authorProfile/{id}',[AuthorController::class,'getAuthor']);
         Route::get('/advertisements',[AdvertisementController::class,'index']);
     });

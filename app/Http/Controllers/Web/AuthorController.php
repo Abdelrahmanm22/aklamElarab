@@ -24,7 +24,7 @@ class AuthorController extends Controller
     }
 
     public function create(Request $request){
-        
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|between:2,100',
             'email' => 'required|string|email|max:100|unique:users',
@@ -44,7 +44,7 @@ class AuthorController extends Controller
         ///check if found photo
         $imageName = null;
         if($request->photo){
-            $imageName = $this->saveAttach($request->photo,"Attachment/Users/Authors/");
+            $imageName = $this->saveAttach($request->photo,"Attachment/Users/");
         }
 
 
@@ -71,7 +71,7 @@ class AuthorController extends Controller
             'twitter'=>$request->twitter,
             'about'=>$request->about,
         ]);
-        
+
         return redirect()->route('author')->with('success', 'Created Author Successfully');
     }
 

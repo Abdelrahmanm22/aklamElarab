@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-///This Model for Data related to the author 
+///This Model for Data related to the author
 class Related extends Model
 {
     use HasFactory;

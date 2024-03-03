@@ -36,7 +36,7 @@ class Rating extends Model
         return self::where('book_id', $bookId)->avg('rating');
     }
 
-    ///A function to get a specific user's rating for a particular 
+    ///A function to get a specific user's rating for a particular
     public static function getUserRating($userId, $bookId)
     {
         return self::where('reader_id', $userId)->where('book_id', $bookId)->first();

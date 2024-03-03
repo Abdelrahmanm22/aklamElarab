@@ -19,8 +19,6 @@ class BookController extends Controller
         $books = Book::select('id', 'name', 'description', 'image', 'file', 'rate', 'created_at')
             ->paginate(20); // You can specify the number of items per page, for example, 10.
 
-
-        
         $response = [
             'data' => $books->items(),
             'message' => 'ok',
@@ -32,6 +30,7 @@ class BookController extends Controller
         return response()->json($response);
     }
 
+    ///get latest 10 books
     public function getLatest()
     {
         $books = Book::select('id', 'name', 'description', 'image', 'file', 'rate', 'created_at')
@@ -42,6 +41,7 @@ class BookController extends Controller
         return $this->apiResponse($books, 'ok', 200);
     }
 
+    ///get  10 highest books
     public function getHighestRate()
     {
         $books = Book::select('id', 'name', 'description', 'image', 'file', 'rate', 'created_at')

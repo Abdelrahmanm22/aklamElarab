@@ -20,7 +20,9 @@ class AuthorController extends Controller
 
     ///this function to get profile author by id
     public function getAuthor($id){
-        $author = User::with('related','books')->find($id);
+        $author = User::with('related', 'books')
+            ->where('type', '=', 'author')
+            ->find($id);
         if(!$author){
             return $this->apiResponse(null,"Not Found Author by this ID",404);
         }

@@ -55,6 +55,7 @@ class Book extends Model
         return $this->hasMany('App\Models\Mark', 'book_id', 'id');
     }
 
+    ///function to update avg rate of book when reader updates its rate
     public static function updateAverageRating($bookId)
     {
         $book = self::find($bookId);
@@ -65,6 +66,7 @@ class Book extends Model
             ]);
         }
     }
+    ///function to increase views of book when open book
     public static function incrementView($bookId)
     {
         $book = self::find($bookId);

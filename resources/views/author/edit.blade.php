@@ -37,9 +37,9 @@
                             <div class="text-center">
                                 @php
                                     if ($author->photo == null) {
-                                        echo '<img class="profile-user-img img-fluid img-circle" src="' . URL::asset('Attachment/Users/Authors/dafault.jpeg') . '" alt="User profile picture">';
+                                        echo '<img class="profile-user-img img-fluid img-circle" src="' . URL::asset('Attachment/Users/dafault.jpeg') . '" alt="User profile picture">';
                                     } else {
-                                        echo '<img class="profile-user-img img-fluid img-circle" src="' . URL::asset('Attachment/Users/Authors/' . $author->photo) . '"alt="User profile picture">';
+                                        echo '<img class="profile-user-img img-fluid img-circle" src="' . URL::asset('Attachment/Users/' . $author->photo) . '"alt="User profile picture">';
                                     }
                                 @endphp
                             </div>
@@ -128,15 +128,15 @@
                             </p>
 
                             {{-- <hr>
-      
+
                       <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
-      
+
                       <p class="text-muted">Malibu, California</p>
-      
+
                       <hr>
-      
+
                       <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
-      
+
                       <p class="text-muted">
                         <span class="tag tag-danger">UI Design</span>
                         <span class="tag tag-success">Coding</span>
@@ -144,11 +144,11 @@
                         <span class="tag tag-warning">PHP</span>
                         <span class="tag tag-primary">Node.js</span>
                       </p>
-      
+
                       <hr>
-      
+
                       <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
-      
+
                       <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p> --}}
                         </div>
                         <!-- /.card-body -->
